@@ -1539,8 +1539,8 @@ if_missing = "error"
 env = "exec"
 
 [providers]
-keychain = { type = "keychain", service = "rust-private-cli-template" }
-pass = { type = "password-store", prefix = "rust-private-cli-template/" }
+keychain = { type = "keychain", service = "repotasks" }
+pass = { type = "password-store", prefix = "repotasks/" }
 age = { type = "age", recipients = [
     "age1sf4r4amev2svqr6llwg8hgtz9n7p5qdh7hh0mavcshzfrmgfduksnq3hql",
     "age1605gsnxpe536sprwccyumq74veg0g80u55n8ggems0t8deau6qdsfnq3m3"
@@ -1557,7 +1557,7 @@ resolver = "3"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.93.1"
-repository = "https://github.com/DenisGorbachev/rust-private-cli-template"
+repository = "https://github.com/DenisGorbachev/repotasks"
 keywords = []
 categories = []
 exclude = [
@@ -1587,8 +1587,8 @@ exclude = [
 ]
 
 [workspace.metadata.details]
-name = "rust-private-cli-template"
-title = "Rust private CLI template"
+name = "repotasks"
+title = ""
 readme = { }
 
 [workspace.lints.rust]
@@ -1604,27 +1604,26 @@ absolute_paths = "deny"
 arithmetic_side_effects = "deny"
 
 [package]
-name = "rust-private-cli-template"
+name = "repotasks"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
-description = "A template for creating Rust private CLI apps with Clap."
 repository.workspace = true
 keywords.workspace = true
 categories.workspace = true
 exclude.workspace = true
 
 [package.metadata.details]
-title = "Rust private CLI template"
+title = ""
 
 [lints]
 workspace = true
 
 [dependencies]
-clap = { version = "4.5.11", features = ["derive", "env"] }
+clap = { version = "4.6.9", features = ["derive", "env"] }
 errgonomic = { git = "https://github.com/DenisGorbachev/errgonomic" }
 thiserror = "2.0.21"
-tokio = { version = "1.39.2", features = ["macros", "fs", "net", "rt", "rt-multi-thread"] }
+tokio = { version = "1.54.1", features = ["macros", "fs", "net", "rt", "rt-multi-thread"] }
 ```
 
 ### src/lib.rs
@@ -1642,7 +1641,7 @@ pub use command::*;
 ```rust
 use clap::Parser;
 use errgonomic::exit_result;
-use rust_private_cli_template::Command;
+use repotasks::Command;
 use std::process::ExitCode;
 
 #[tokio::main]
