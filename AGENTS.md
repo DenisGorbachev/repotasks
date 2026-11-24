@@ -507,6 +507,22 @@ Examples:
 
 A pkg that has a remote whose name contains `public` or `pre-public` and ends with `template`.
 
+### Guidelines for `serde`
+
+#### Reqs
+
+- Every input data type must derive `Serialize`, `Deserialize`.
+- Every `Option`-wrapped field must have attr:
+  - `#[serde(skip_serializing_if = "Option::is_none")]`.
+- Every `OffsetDateTime` field must have attr:
+  - `#[serde(with = "time::serde::rfc3339")]`.
+- Every `Option<OffsetDateTime>` field must have attr:
+  - `#[serde(with = "time::serde::rfc3339::option")]`.
+
+#### Notes
+
+- Prefer `serde_with` to reduce code size by avoiding custom `Serialize`/`Deserialize` impls.
+
 ### Guidelines for `clap`
 
 #### Reqs
@@ -1620,10 +1636,19 @@ title = ""
 workspace = true
 
 [dependencies]
+age = "0.12.1"
+base64 = "0.23.1"
 clap = { version = "4.6.9", features = ["derive", "env"] }
 errgonomic = { git = "https://github.com/DenisGorbachev/errgonomic" }
+secrecy = { version = "0.10.3", features = ["serde"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
 thiserror = "2.0.21"
 tokio = { version = "1.54.1", features = ["macros", "fs", "net", "rt", "rt-multi-thread"] }
+toml = "1.2.1"
+toml_edit = "0.25.19"
+url = "2.5.8"
+xshell = "0.2.7"
 ```
 
 ### src/lib.rs
@@ -1634,6 +1659,18 @@ tokio = { version = "1.54.1", features = ["macros", "fs", "net", "rt", "rt-multi
 mod command;
 
 pub use command::*;
+
+mod constants;
+
+pub use constants::*;
+
+mod functions;
+
+pub use functions::*;
+
+mod types;
+
+pub use types::*;
 ```
 
 ### src/main.rs

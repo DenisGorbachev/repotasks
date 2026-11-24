@@ -4,7 +4,7 @@ use std::process::ExitCode;
 use thiserror::Error;
 
 #[derive(clap::Parser, Debug)]
-#[command(author, version, about, propagate_version = true)]
+#[command(author, version, about, propagate_version = true, flatten_help = true, disable_help_subcommand = true)]
 pub struct Command {
     #[command(subcommand)]
     subcommand: Subcommand,
@@ -13,6 +13,7 @@ pub struct Command {
 #[derive(clap::Subcommand, Clone, Debug)]
 pub enum Subcommand {
     Print(PrintCommand),
+    Fnox(FnoxCommand),
 }
 
 impl Command {
@@ -23,6 +24,7 @@ impl Command {
         } = self;
         match subcommand {
             Print(command) => map_err!(command.run().await, PrintCommandRunFailed),
+            Fnox(command) => map_err!(command.run().await, FnoxCommandRunFailed),
         }
     }
 }
@@ -31,8 +33,22 @@ impl Command {
 pub enum CommandRunError {
     #[error("failed to run print command")]
     PrintCommandRunFailed { source: PrintCommandRunError },
+    #[error("failed to run fnox command")]
+    FnoxCommandRunFailed { source: FnoxCommandRunError },
 }
 
 mod print_command;
 
 pub use print_command::*;
+
+mod fnox_command;
+
+pub use fnox_command::*;
+
+mod fnox_github_command;
+
+pub use fnox_github_command::*;
+
+mod fnox_github_init_age_key_command;
+
+pub use fnox_github_init_age_key_command::*;

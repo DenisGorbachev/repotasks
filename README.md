@@ -25,15 +25,30 @@ cargo add repotasks
 ## Usage
 
 ```shell
-Usage: repotasks <COMMAND>
-
-Commands:
-  print  
-  help   Print this message or the help of the given subcommand(s)
+Usage: repotasks print --path <PATH>
+       repotasks fnox github init-age-key [OPTIONS]
 
 Options:
   -h, --help     Print help
   -V, --version  Print version
+
+repotasks print:
+  -p, --path <PATH>  
+  -h, --help         Print help
+  -V, --version      Print version
+
+repotasks fnox:
+  -h, --help     Print help
+  -V, --version  Print version
+
+repotasks fnox github:
+  -h, --help     Print help
+  -V, --version  Print version
+
+repotasks fnox github init-age-key:
+      --vault <VAULT>  1Password vault for the repository key [default: Repos]
+  -h, --help           Print help
+  -V, --version        Print version
 ```
 
 ## Other packages
