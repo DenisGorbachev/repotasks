@@ -1639,7 +1639,7 @@ workspace = true
 age = "0.12.1"
 base64 = "0.23.1"
 clap = { version = "4.6.9", features = ["derive", "env"] }
-errgonomic = { git = "https://github.com/DenisGorbachev/errgonomic" }
+errgonomic = { git = "https://github.com/DenisGorbachev/errgonomic", features = ["process"] }
 secrecy = { version = "0.10.3", features = ["serde"] }
 serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1.0.154"
