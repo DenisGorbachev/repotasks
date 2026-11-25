@@ -6,12 +6,12 @@ use xshell::{Shell, cmd};
 
 pub fn reencrypt_test_secrets(sh: &Shell, identity: &Identity) -> Result<(), ReencryptTestSecretsError> {
     use ReencryptTestSecretsError::*;
-    let keys = handle!(pending_keys(identity), PendingKeysFailed);
+    let keys = handle!(pending_keys(sh, identity), PendingKeysFailed);
     if keys.is_empty() {
         return Ok(());
     }
     handle!(run_in_terminal(cmd!(sh, "fnox --config {FNOX_CONFIG} --profile {TEST_PROFILE} reencrypt --force --provider age -- {keys...}")), FnoxReencryptFailed);
-    let unreadable = handle!(pending_keys(identity), PendingKeysAfterReencryptFailed);
+    let unreadable = handle!(pending_keys(sh, identity), PendingKeysAfterReencryptFailed);
     handle_bool!(!unreadable.is_empty(), RecipientsInvalid, unreadable);
     Ok(())
 }

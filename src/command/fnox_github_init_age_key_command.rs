@@ -3,7 +3,7 @@ use clap::Parser;
 use errgonomic::handle;
 use std::process::ExitCode;
 use thiserror::Error;
-use xshell::Shell;
+use xshell::{Shell, cmd};
 
 #[derive(Parser, Clone, Debug)]
 #[command(flatten_help = true)]
@@ -20,6 +20,8 @@ impl FnoxGithubInitAgeKeyCommand {
             vault,
         } = self;
         let sh = handle!(Shell::new(), ShellNewFailed);
+        let root = handle!(cmd!(sh, "git rev-parse --show-toplevel").read(), GitRevParseFailed);
+        sh.change_dir(root);
         handle!(require_clean_repo(&sh), RequireCleanRepoFailed);
         let repo = handle!(GithubRepo::origin(&sh), OriginFailed);
         let identity = handle!(get_or_create_ci_age_identity(&sh, &vault, &repo), GetOrCreateCiAgeIdentityFailed, vault, repo);
@@ -34,6 +36,8 @@ impl FnoxGithubInitAgeKeyCommand {
 pub enum FnoxGithubInitAgeKeyCommandRunError {
     #[error("failed to create a shell")]
     ShellNewFailed { source: xshell::Error },
+    #[error("failed to find the root of the Git repository")]
+    GitRevParseFailed { source: xshell::Error },
     #[error("repository is not ready for this task")]
     RequireCleanRepoFailed { source: RequireCleanRepoError },
     #[error("failed to resolve the GitHub repository of the origin remote")]

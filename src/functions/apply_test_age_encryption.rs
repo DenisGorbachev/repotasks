@@ -6,7 +6,7 @@ use xshell::Shell;
 
 pub fn apply_test_age_encryption(sh: &Shell, identity: &Identity) -> Result<(), ApplyTestAgeEncryptionError> {
     use ApplyTestAgeEncryptionError::*;
-    handle!(update_recipients(identity), UpdateRecipientsFailed);
+    handle!(update_recipients(sh, identity), UpdateRecipientsFailed);
     map_err!(reencrypt_test_secrets(sh, identity), ReencryptTestSecretsFailed)
 }
 
