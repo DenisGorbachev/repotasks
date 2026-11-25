@@ -1,6 +1,12 @@
 # repotasks
 
-## `fnox github init-age-key`
+## struct FnoxGithubInitAgeKeyCommand
 
-- Must resolve GitHub repo from stored origin URL through `gh repo view`.
-- May treat write races as acceptable because command is run by a single user who guarantees that other scripts do not run concurrently.
+- May ignore write races.
+  - Rationale: a single user runs it and guarantees that no other scripts run concurrently.
+
+## struct GithubRepo
+
+- Must have methods:
+  - `origin`
+    - Must resolve the repo by passing the stored `remote.origin.url` to `gh repo view`.

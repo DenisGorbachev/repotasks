@@ -4,6 +4,8 @@
 
 # repotasks
 
+[![Build](https://github.com/DenisGorbachev/repotasks/actions/workflows/ci.yml/badge.svg)](https://github.com/DenisGorbachev/repotasks)
+
 <!-- crate documentation start -->
 This is a module-level comment for a Rust lib
 <!-- crate documentation end -->
@@ -54,3 +56,7 @@ repotasks fnox github init-age-key:
 ## Other packages
 
 This workspace has no other packages.
+
+## Gratitude
+
+Like the project? [⭐ Star this repo](https://github.com/DenisGorbachev/repotasks) on GitHub!
