@@ -7,7 +7,7 @@
 [![Build](https://github.com/DenisGorbachev/repotasks/actions/workflows/ci.yml/badge.svg)](https://github.com/DenisGorbachev/repotasks)
 
 <!-- crate documentation start -->
-This is a module-level comment for a Rust lib
+Tasks for repositories created from Rust templates.
 <!-- crate documentation end -->
 
 ## Installation

@@ -1667,7 +1667,7 @@ xshell = "0.2.7"
 ### src/lib.rs
 
 ```rust
-//! This is a module-level comment for a Rust lib
+//! Tasks for repositories created from Rust templates.
 
 mod command;
 

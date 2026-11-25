@@ -1,4 +1,4 @@
-//! This is a module-level comment for a Rust lib
+//! Tasks for repositories created from Rust templates.
 
 mod command;
 
